@@ -4,7 +4,7 @@ metadata:
   description: Example Cloudformation Setup using Colony
     
 clouds: 
-  - AWS2: us-east-1
+  - AWS 2: us-east-1
 
 inputs:
   - Template_URL_Location: https://colony-public-templates.s3.amazonaws.com/nginx-cfn-example.json
