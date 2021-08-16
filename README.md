@@ -1,2 +1,2 @@
 # Colony-Cloudformation
-Cloudformation Example using Colony
+Cloudformation example using Colony

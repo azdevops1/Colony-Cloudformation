@@ -9,7 +9,7 @@ inputs:
 
 module:
   source: git::https://github.com/QualiSystemsLab/Colony-Cloudformation.git//terraform/cfn?ref=${BRANCH}
-  enable_auto_tagging: false
+  # enable_auto_tagging: false
   
 
 terraform_version: 1.0.0

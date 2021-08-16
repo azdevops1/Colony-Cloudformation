@@ -22,7 +22,7 @@ services:
     - cfn:
         input_values:
             - BRANCH: $colony.repos.current.branch
-            - REGION: us-east-1
+            - REGION: us-west-2
             - SANDBOX_ID: $colony.environment.id
             - TEMPLATE_URL: $Template_URL_Location
 
