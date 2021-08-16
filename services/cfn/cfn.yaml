@@ -1,0 +1,31 @@
+spec_version: 1
+kind: TerraForm
+inputs:
+  - REGION:
+  - ROLE_ARN: PowerUserAccess
+  - BRANCH:
+  - SANDBOX_ID:
+  - TEMPLATE_URL:
+
+module:
+  source: git::https://github.com/QualiSystemsLab/Colony-Cloudformation.git//terraform/cfn?ref=${BRANCH}
+  enable_auto_tagging: false
+  
+
+terraform_version: 1.0.0
+
+variables: 
+  values:       
+    - aws_region: $REGION
+    - SANDBOX_ID: $SANDBOX_ID
+    - TEMPLATE_URL: $TEMPLATE_URL
+
+outputs:
+  - REDIRECT_URL
+  
+permissions:  
+  aws:
+    role_arn: $ROLE_ARN
+
+# debugging:
+#   show_tf_plan: true

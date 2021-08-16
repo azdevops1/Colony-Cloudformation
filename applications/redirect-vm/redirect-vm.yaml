@@ -1,0 +1,53 @@
+
+spec_version: 1
+kind: application
+
+inputs:
+  - REDIRECT_URL:
+
+source:
+  os_type: linux
+  image:
+    azure_image:
+      - urn: Canonical:UbuntuServer:16.04-LTS:latest
+        username: adminuser
+    ami:
+      - id: ami-02fe94dee086c0c37
+        region: us-east-1
+        username: ubuntu
+      - id: ami-02d0ea44ae3fe9561
+        region: us-west-2
+        username: ubuntu
+      - id: ami-0f2ed58082cb08a4d
+        region: eu-west-1
+        username: ubuntu
+
+infrastructure:
+  compute:
+    spec:
+      azure:
+        vm_size: Standard_D2a_v4
+      aws: 
+        instance_type: t3.nano
+  connectivity:
+    external:
+      - port_info:
+          port: 80
+          ingress-healthcheck:                  
+            healthy-threshold: 5
+            interval: 30
+            path: /
+            status-codes: 200-399
+            timeout: 5
+            unhealthy-threshold: 2
+
+configuration:  
+  initialization:
+    script: init.sh
+
+  healthcheck:
+    wait_for_ports: ALL
+    timeout: 120
+
+debugging:
+  connection_protocol: SSH

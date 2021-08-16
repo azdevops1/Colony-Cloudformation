@@ -1,0 +1,30 @@
+spec_version: 1
+kind: blueprint
+metadata:
+  description: Example Cloudformation Setup using Colony
+    
+clouds: 
+  - AWS2: us-east-1
+
+inputs:
+  - Template_URL_Location: https://colony-public-templates.s3.amazonaws.com/nginx-cfn-example.json
+
+
+applications:
+    - redirect-vm:
+        instances: 1
+        input_values:
+            - REDIRECT_URL: $colony.services.cfn.outputs.REDIRECT_URL
+        depends_on:
+            - cfn
+
+services:
+    - cfn:
+        input_values:
+            - BRANCH: $colony.repos.current.branch
+            - REGION: us-east-1
+            - SANDBOX_ID: $colony.environment.id
+            - TEMPLATE_URL: $Template_URL_Location
+
+debugging:
+  bastion_availability: enabled-on
