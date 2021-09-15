@@ -1,7 +1,7 @@
 spec_version: 1
 kind: blueprint
 metadata:
-  description: Example Cloudformation Setup using Colony
+  description: Example Cloudformation Setup using Torque
     
 clouds: 
   - AWS 2: us-east-1
@@ -14,16 +14,16 @@ applications:
     - redirect-vm:
         instances: 1
         input_values:
-            - REDIRECT_URL: $colony.services.cfn.outputs.REDIRECT_URL
+            - REDIRECT_URL: $torque.services.cfn.outputs.REDIRECT_URL
         depends_on:
             - cfn
 
 services:
     - cfn:
         input_values:
-            - BRANCH: $colony.repos.current.branch
+            - BRANCH: $torque.repos.current.branch
             - REGION: us-west-2
-            - SANDBOX_ID: $colony.environment.id
+            - SANDBOX_ID: $torque.environment.id
             - TEMPLATE_URL: $Template_URL_Location
 
 debugging:
